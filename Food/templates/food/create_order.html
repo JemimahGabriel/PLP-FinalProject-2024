@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Order</title>
+</head>
+<body>
+    <h1>Create Your Order</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="customer_name">Name:</label>
+        <input type="text" id="customer_name" name="customer_name" required><br>
+        
+        <label for="customer_phone">Phone:</label>
+        <input type="text" id="customer_phone" name="customer_phone" required><br>
+        
+        <label for="customer_address">Address (optional):</label>
+        <input type="text" id="customer_address" name="customer_address"><br>
+        
+        <label>Pickup:</label>
+        <input type="checkbox" name="pickup"><br>
+        
+        <h2>Select Items:</h2>
+        {% for item in food_items %}
+            <label for="item_{{ item.id }}">{{ item.name }}</label>
+            <input type="number" id="item_{{ item.id }}" name="item_{{ item.id }}" min="0"><br>
+        {% endfor %}
+        
+        <button type="submit">Place Order</button>
+    </form>
+    <a href="{% url 'homepage' %}">Back to Homepage</a>
+</body>
+</html>

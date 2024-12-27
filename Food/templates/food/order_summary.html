@@ -1,0 +1,21 @@
+{% extends 'Food/base.html' %}
+
+{% block title %}Order Summary{% endblock %}
+
+{% block content %}
+<h1>Order Summary</h1>
+<p><strong>Customer Name:</strong> {{ order.customer_name }}</p>
+<p><strong>Phone:</strong> {{ order.customer_phone }}</p>
+<p><strong>Address:</strong> {{ order.customer_address }}</p>
+<p><strong>Pickup:</strong> {{ order.is_pickup|yesno:"Yes,No" }}</p>
+
+<h2>Order Items</h2>
+<ul>
+    {% for item in order.orderitem_set.all %}
+        <li>{{ item.food_item.name }} ({{ item.quantity }}) - ${{ item.food_item.price }}</li>
+    {% endfor %}
+</ul>
+
+<p><strong>Total:</strong> ${{ order.total_price }}</p>
+<a href="{% url 'create_delivery' order.id %}" class="btn btn-primary">Create Delivery</a>
+{% endblock %}

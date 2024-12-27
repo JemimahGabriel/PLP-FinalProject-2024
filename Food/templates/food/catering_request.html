@@ -1,0 +1,35 @@
+
+{% extends 'Food/base.html' %}
+
+{% block title %}Catering Request{% endblock %}
+
+{% block content %}
+<h1>Catering Request</h1>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="customer_name">Name:</label>
+        <input type="text" id="customer_name" name="customer_name" required>
+    </div>
+    <div>
+        <label for="customer_phone">Phone:</label>
+        <input type="text" id="customer_phone" name="customer_phone" required>
+    </div>
+    <div>
+        <label for="event_date">Event Date:</label>
+        <input type="date" id="event_date" name="event_date" required>
+    </div>
+    <div>
+        <label for="number_of_guests">Number of Guests:</label>
+        <input type="number" id="number_of_guests" name="number_of_guests" required>
+    </div>
+    <div>
+        <label for="menu_preferences">Menu Preferences:</label>
+        <textarea id="menu_preferences" name="menu_preferences"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Request</button>
+</form>
+{% endblock %}
+
+
+

@@ -14,10 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include  # include is used for app-specific URLs
+from Food import views  # Import the app's views to handle the homepage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path()
+    path('', views.homepage, name='homepage'),  # Root path for homepage
+    path('Food/', include('Food.urls')),  # Include app-level URLs
 ]

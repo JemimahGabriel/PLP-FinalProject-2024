@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Delivery</title>
+</head>
+<body>
+    <h1>Create Delivery for Order {{ order.id }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="delivery_address">Delivery Address:</label>
+        <input type="text" id="delivery_address" name="delivery_address" required><br>
+        
+        <label for="delivery_type">Delivery Type:</label>
+        <select id="delivery_type" name="delivery_type">
+            <option value="standard">Standard</option>
+            <option value="express">Express</option>
+        </select><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{% url 'homepage' %}">Back to Homepage</a>
+</body>
+</html>

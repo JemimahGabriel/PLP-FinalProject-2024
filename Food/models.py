@@ -22,13 +22,17 @@ class FoodItem(models.Model):
     
 class Order(models.Model):
     customer_name = models.CharField(max_length=255)
-    food_item = models.ForeignKey(FoodItem, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    customer_phone = models.CharField(max_length=15, default="")
+    customer_address = models.TextField(blank=True, null=True)
+    is_pickup = models.BooleanField(default=False)
     order_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, default='Pending')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+
 
     def __str__(self):
-        return f"Order for {self.customer_name}"
+        return f"Order {self.id} for {self.customer_name}"
+
     
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -59,3 +63,22 @@ class Delivery(models.Model):
 
     def __str__(self):
         return f"Delivery for Order {self.order.id}"
+    
+    from django.db import models
+
+class CateringRequest(models.Model):
+    customer_name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=15)
+    email = models.EmailField()
+    event_date = models.DateField()
+    event_type = models.CharField(max_length=50, choices=[
+        ('wedding', 'Wedding'),
+        ('birthday', 'Birthday'),
+        ('corporate', 'Corporate'),
+        ('other', 'Other'),
+    ])
+    guest_count = models.PositiveIntegerField()
+    special_requests = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.customer_name} - {self.event_type} on {self.event_date}"
