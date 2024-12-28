@@ -1,27 +1,32 @@
-
 {% extends 'Food/base.html' %}
 
 {% block title %}Food Detail{% endblock %}
 
 {% block content %}
-<h1>{{ food_item.name }}</h1>
-<img src="{{ food_item.image.url }}" alt="{{ food_item.name }}" style="max-width: 300px; height: auto;">
-<p><strong>Category:</strong> {{ food_item.category.name }}</p>
-<p><strong>Description:</strong> {{ food_item.description }}</p>
-<p><strong>Price:</strong> ${{ food_item.price }}</p>
-<p><strong>Available:</strong> {{ food_item.is_available|yesno:"Yes,No" }}</p>
-
-{% if food_item.is_available %}
-<form method="post" action="{% url 'create_order' %}">
-    {% csrf_token %}
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
-    <input type="hidden" name="food_item_id" value="{{ food_item.id }}">
-    <button type="submit" class="btn btn-primary">Order Now</button>
-</form>
-{% else %}
-<p>This item is currently unavailable.</p>
-{% endif %}
-
-<a href="{% url 'menu' %}" class="btn btn-secondary">Back to Menu</a>
+<div class="container mt-5">
+    <div class="card">
+        <img src="{{ food_item.image.url }}" class="card-img-top" alt="{{ food_item.name }}">
+        <div class="card-body">
+            <h2 class="card-title">{{ food_item.name }}</h2>
+            <p class="card-text"><strong>Category:</strong> {{ food_item.category.name }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ food_item.description }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ food_item.price }}</p>
+            <p class="card-text"><strong>Available:</strong> {{ food_item.is_available|yesno:"Yes,No" }}</p>
+            {% if food_item.is_available %}
+            <form method="post" action="{% url 'create_order' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" class="form-control" required>
+                </div>
+                <input type="hidden" name="food_item_id" value="{{ food_item.id }}">
+                <button type="submit" class="btn btn-primary">Order Now</button>
+            </form>
+            {% else %}
+            <p class="text-danger">This item is currently unavailable.</p>
+            {% endif %}
+            <a href="{% url 'menu' %}" class="btn btn-secondary mt-3">Back to Menu</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from django.contrib import admin
 from .models import Category, FoodItem, Order, OrderItem, Delivery, CateringRequest
 
 class FoodItemAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price']  # Replace 'name' and 'price' with your actual model field
+    list_display = ('id', 'image', 'name', 'category', 'price', 'is_available')  # Add 'id' here
+
 
 # Register your models here.
 admin.site.register(Category)

@@ -1,35 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catering Request</title>
+    <link rel="stylesheet" href="{% static 'Food/styles.css' %}">
+    <script>
+        function updatePrice() {
+            var eventType = document.getElementById("event_type").value;
+            var guestCount = parseInt(document.getElementById("guest_count").value);
+            var pricePerGuest;
 
-{% extends 'Food/base.html' %}
+            if (eventType === "wedding") {
+                pricePerGuest = 50;
+            } else if (eventType === "birthday") {
+                pricePerGuest = 30;
+            } else if (eventType === "corporate") {
+                pricePerGuest = 40;
+            } else {
+                pricePerGuest = 20; // Default for "other"
+            }
 
-{% block title %}Catering Request{% endblock %}
+            var totalPrice = pricePerGuest * guestCount;
+            document.getElementById("total_price").innerText = "Total Price: $" + totalPrice;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Catering Request</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="customer_name">Customer Name</label>
+                <input type="text" id="customer_name" name="customer_name" required>
+            </div>
 
-{% block content %}
-<h1>Catering Request</h1>
-<form method="post">
-    {% csrf_token %}
-    <div>
-        <label for="customer_name">Name:</label>
-        <input type="text" id="customer_name" name="customer_name" required>
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" id="phone_number" name="phone_number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event_date">Event Date</label>
+                <input type="date" id="event_date" name="event_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event_type">Event Type</label>
+                <select id="event_type" name="event_type" onchange="updatePrice()" required>
+                    <option value="wedding">Wedding</option>
+                    <option value="birthday">Birthday</option>
+                    <option value="corporate">Corporate</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guest_count">Number of Guests</label>
+                <input type="number" id="guest_count" name="guest_count" min="1" value="1" onchange="updatePrice()" required>
+            </div>
+
+            <div class="form-group">
+                <label for="special_requests">Special Requests</label>
+                <textarea id="special_requests" name="special_requests"></textarea>
+            </div>
+
+            <div class="form-group">
+                <p id="total_price">Total Price: $0</p>
+            </div>
+
+            <button type="submit">Submit Request</button>
+        </form>
     </div>
-    <div>
-        <label for="customer_phone">Phone:</label>
-        <input type="text" id="customer_phone" name="customer_phone" required>
-    </div>
-    <div>
-        <label for="event_date">Event Date:</label>
-        <input type="date" id="event_date" name="event_date" required>
-    </div>
-    <div>
-        <label for="number_of_guests">Number of Guests:</label>
-        <input type="number" id="number_of_guests" name="number_of_guests" required>
-    </div>
-    <div>
-        <label for="menu_preferences">Menu Preferences:</label>
-        <textarea id="menu_preferences" name="menu_preferences"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit Request</button>
-</form>
-{% endblock %}
-
-
-
+</body>
+</html>

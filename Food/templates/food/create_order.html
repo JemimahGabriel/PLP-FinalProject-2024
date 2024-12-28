@@ -1,34 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Order</title>
-</head>
-<body>
-    <h1>Create Your Order</h1>
+{% extends 'Food/base.html' %}
+
+{% block title %}Create Order{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Create Order</h1>
     <form method="post">
         {% csrf_token %}
-        <label for="customer_name">Name:</label>
-        <input type="text" id="customer_name" name="customer_name" required><br>
-        
-        <label for="customer_phone">Phone:</label>
-        <input type="text" id="customer_phone" name="customer_phone" required><br>
-        
-        <label for="customer_address">Address (optional):</label>
-        <input type="text" id="customer_address" name="customer_address"><br>
-        
-        <label>Pickup:</label>
-        <input type="checkbox" name="pickup"><br>
-        
-        <h2>Select Items:</h2>
+        <div class="mb-3">
+            <label for="customer_name" class="form-label">Name:</label>
+            <input type="text" id="customer_name" name="customer_name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="customer_phone" class="form-label">Phone:</label>
+            <input type="text" id="customer_phone" name="customer_phone" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="customer_address" class="form-label">Address (if delivery):</label>
+            <input type="text" id="customer_address" name="customer_address" class="form-control">
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="pickup" name="pickup">
+            <label for="pickup" class="form-check-label">Pickup Order</label>
+        </div>
+        <h2>Order Items</h2>
         {% for item in food_items %}
-            <label for="item_{{ item.id }}">{{ item.name }}</label>
-            <input type="number" id="item_{{ item.id }}" name="item_{{ item.id }}" min="0"><br>
+        <div class="mb-3">
+            <label for="item_{{ item.id }}">{{ item.name }} - ${{ item.price }}</label>
+            <input type="number" id="item_{{ item.id }}" name="item_{{ item.id }}" min="0"  value="0"  placeholder="Quantity" class="form-control">
+        </div>
         {% endfor %}
-        
-        <button type="submit">Place Order</button>
+        <button type="submit" class="btn btn-primary">Place Order</button>
     </form>
-    <a href="{% url 'homepage' %}">Back to Homepage</a>
-</body>
-</html>
+</div>
+{% endblock %}

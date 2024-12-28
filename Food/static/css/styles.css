@@ -1,0 +1,116 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container for the homepage content */
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-top: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 10px auto;
+    max-width: 600px;
+    color: #555;
+}
+
+/* Buttons styling */
+.button {
+    display: inline-block;
+    margin: 15px 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+    background-color: #2980b9;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #1c5985;
+}
+
+/* Center buttons */
+.button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* General Styles for Catering Request Form */
+.catering-request-form {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.catering-request-form h2 {
+    font-size: 2rem;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.catering-request-form .form-label {
+    font-weight: bold;
+}
+
+.catering-request-form .form-control,
+.catering-request-form .form-select,
+.catering-request-form .form-textarea {
+    border-radius: 5px;
+}
+
+.catering-request-form .btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+/* Catering Summary Styles */
+.catering-summary {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.catering-summary h2 {
+    font-size: 2rem;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.catering-summary p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.catering-summary a.btn {
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .catering-request-form,
+    .catering-summary {
+        padding: 15px;
+    }
+}

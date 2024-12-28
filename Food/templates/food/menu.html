@@ -1,19 +1,44 @@
 {% extends 'Food/base.html' %}
 
+{% load static %}  
+
 {% block title %}Menu{% endblock %}
 
 {% block content %}
-<h1>Menu</h1>
-{% for category in categories %}
-    <h2>{{ category.name }}</h2>
-    <ul>
-        {% for item in food_items %}
-            {% if item.category.id == category.id %}
-                <li>
-                    <a href="{% url 'food_detail' item.id %}">{{ item.name }}</a> - ${{ item.price }}
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-{% endfor %}
+<h1 class="text-center mb-4">Our Menu</h1>
+<div class="container">
+    {% for category in categories %}
+        <div class="col-12">
+            <h2 class="text-secondary">{{ category.name }}</h2>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for item in food_items %}
+                {% if item.category.id == category.id %}
+                    <div class="col">
+                        <div class="card">
+                            <!-- Check if the food item has an image -->
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
+                            {% else %}
+                                <!-- Fallback image or placeholder if no image is provided -->
+                                <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
+                            {% endif %}
+                            
+                            <div class="card-body">
+                                <!-- Food item name -->
+                                <h5 class="card-title">{{ item.name }}</h5>
+                                
+                                <!-- Price of the food item -->
+                                <p class="card-text">${{ item.price }}</p>
+                                
+                                <!-- Button to view details -->
+                                <a href="{% url 'food_detail' item.id %}" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

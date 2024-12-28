@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Submitted Successfully</title>
+    <link rel="stylesheet" href="{% static 'Food/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Catering Request Submitted</h1>
+        <p>Thank you, {{ customer_name }}! Your catering request has been successfully submitted. Here are the details:</p>
+
+        <div class="form-details">
+            <p><strong>Customer Name:</strong> {{ customer_name }}</p>
+            <p><strong>Phone Number:</strong> {{ phone_number }}</p>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <p><strong>Event Date:</strong> {{ event_date }}</p>
+            <p><strong>Event Type:</strong> {{ event_type }}</p>
+            <p><strong>Number of Guests:</strong> {{ guest_count }}</p>
+            <p><strong>Special Requests:</strong> {{ special_requests }}</p>
+            <p><strong>Total Price:</strong> ${{ total_price }}</p>
+        </div>
+
+        <p>If you need to make any changes, please contact us at [ Contact Info].</p>
+        <a href="{% url 'catering_request' %}">Submit another request</a>
+    </div>
+</body>
+</html>
